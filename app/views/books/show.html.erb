@@ -1,0 +1,26 @@
+<% if flash["notice"] %>
+<div class="flash" style="color:green;">
+  <%= flash[:notice] %>
+</div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <%= render 'layouts/user_info',book:@newbook , user:@user %>
+    <div class="col-xs-9">
+      <h2>Book detail</h2>
+      <table class="table">
+      <tr>
+        <td><%= attachment_image_tag @userss, :profile_image, style: "width: 40px; height: 40px;", format: 'jpeg', class: "img-circle  profile-img", fallback: "no_image.jpg" %><br>
+        <%= link_to  @user.name,user_path(@user.id) %></td>
+        <td><%= link_to @book.title,'' %></td>
+        <td><%= @book.body %></td>
+        <% if @book.user == current_user %>
+          <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-success" %></td>
+          <td><%= link_to 'Destroy', book_path(@book), method: :delete, "data-confirm" => "Are you sure?" , class: "btn btn-danger"%></td>
+        <% end %>
+      </tr>
+      </table>
+    </div>
+</div>
+</div>
